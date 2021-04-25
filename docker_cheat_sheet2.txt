@@ -1,0 +1,62 @@
+DOCKER CHEATSHEET
+
+https://docker-curriculum.com/
+
+#SEE IMAGES
+Docker images
+
+#remove images
+docker image rm 75835a67d134 2a4cca5ac898
+
+#SEE container	running
+docker ps
+docker ps -a <- (see all)
+docker container ls -a
+docker container ls -a --filter status=exited --filter status=created
+docker container ls -aq
+
+#stop container
+docker stop [OPTIONS] CONTAINER [CONTAINER...]
+
+#SEE network
+docker network ls
+
+
+#remove docker
+Docker rm <id>
+docker rm $(docker ps -a -q -f status=exited) <- remove all inactive
+docker container rm cc3f2ff51cab cd20b396a061 <- (remove all images that are created more than 12 hours ago)
+
+#SEE volume
+docker volume ls
+docker volume rm <id>
+
+#clean docker
+docker system prune <- (command will remove all stopped containers, all dangling images, and all unused networks)
+docker system prune --volumes <- (remove all unused volumes)
+docker container prune --filter "until=12h"
+
+
+docker container stop $(docker container ls -aq)
+
+#CREATE SHELL INSIDER CONTAINER
+docker exec -t -i nervous_buck /bin/bash
+
+*************************************************
+JENKINS
+#run 
+docker pull jenkins
+docker run -d -p 8080:8080 -v $PWD/jenkins:/var/jenkins_home:z -t jenkins/jenkins
+
+
+
+
+
+
+
+
+
+
+
+
+
